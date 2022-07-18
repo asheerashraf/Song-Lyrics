@@ -1,0 +1,22 @@
+
+.searchContainer{
+    background: #fff;
+    margin: -32px 16px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 1px;
+}   
+
+.inputField:focus {
+    box-shadow: none;
+}
+
+.lyrics{
+    white-space: pre-line;
+    margin-top: 15px;
+}
+
+.loading{
+    color: maroon;
+    font-size: 18px;
+    font-weight: bold;
+}

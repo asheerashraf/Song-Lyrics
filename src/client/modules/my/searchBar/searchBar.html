@@ -1,0 +1,54 @@
+<template>
+    <form class="form-inline p-3 p-sm-4 mb-4 searchContainer">
+        <div class="row w-100">
+            <div class="col-12 col-sm-5 mb-3 mb-sm-0">
+                <div class="input-group input-group-1g">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <img src="../resources/images/headphones.svg">
+                      </span>
+                    </div>
+                    <input type="text" class="form-control inputField" 
+                    name="song"
+                    placeholder="Song" 
+                    aria-label="Song" aria-describedby="Song"
+                    onkeyup={changeHandler}>
+                  </div>
+            </div>
+
+            <div class="col-12 col-sm-5 mb-3 mb-sm-0">
+                <div class="input-group input-group-1g">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <img src="../resources/images/people.svg">
+                      </span>
+                    </div>
+                    <input type="text" class="form-control inputField" 
+                    name="artist"
+                    placeholder="Artist" 
+                    aria-label="Artist" aria-describedby="Artist"
+                    onkeyup={changeHandler}>
+                  </div>
+            </div>  
+
+            <div class="col-12 col-sm-2 ">
+                <button type="button" class="btn btn-dark btn-block" onclick={searchHandler}>Search</button>
+            </div>
+
+        </div>
+    </form>
+
+    <template if:true={lyricSearched}>
+      <div  class="col-12" >
+        <h4>{title}</h4>
+      </div>
+
+      <template if:true={lyricFound}>
+        <div class="lyrics col-12" >{lyrics}</div>
+      </template>
+      <template if:false={lyricFound}>
+        <div class="lyrics col-12" ><strong>{errorMessage}</strong></div>
+      </template>
+    </template>
+    
+</template>
