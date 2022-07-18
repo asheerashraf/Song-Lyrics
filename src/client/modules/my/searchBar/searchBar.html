@@ -39,16 +39,20 @@
     </form>
 
     <template if:true={lyricSearched}>
-      <div  class="col-12" >
-        <h4>{title}</h4>
-      </div>
-
-      <template if:true={lyricFound}>
-        <div class="lyrics col-12" >{lyrics}</div>
-      </template>
-      <template if:false={lyricFound}>
-        <div class="lyrics col-12" ><strong>{errorMessage}</strong></div>
-      </template>
+      <h5 class="col-12">Loading! Please wait...</h5>
     </template>
+      <template if:true={lyricFound}>
+        <div class="lyrics col-12" >
+          <h4>{title}</h4>
+          <p>{lyrics}</p>
+        </div>
+      </template>
+      <template if:true={lyricNotFound}>
+        <div class="lyrics col-12" >
+          <h4>{title}</h4>
+          <strong>{errorMessage}</strong>
+        </div>
+      </template>
+
     
 </template>

@@ -17,9 +17,18 @@ export default class SearchBar extends LwcBootstrap {
         lyrics = '';
         lyricSearched = false;
         lyricFound;
+        lyricNotFound;
         errorMessage;
     
     searchHandler(){
+
+        //resets variables to display loading message while retrieving lyrics.
+        this.lyricFound = false;
+        this.lyricNotFound = false;
+        this.lyricSearched = true;
+
+        this.hideLoading();
+
         const url = `https://lyrics-plus.p.rapidapi.com/lyrics/${this.song}/${this.artist}`
 
         fetch(url, this.options)
@@ -29,24 +38,26 @@ export default class SearchBar extends LwcBootstrap {
             if(data.lyrics){
                 this.lyrics = (data.lyrics)
                 this.lyricFound = true;
+               
             } else{
-                this.lyricFound = false;
+                this.lyricNotFound = true;
                 this.errorMessage = 'LYRICS NOT FOUND!\nCheck your spelling or try another search...'
+      
             }
         })
         .catch(err => {
             console.error(err);
-            this.lyricFound = false;
+            this.lyricNotFound = true;
             this.errorMessage = 'LYRICS NOT FOUND!\nCheck your spelling or try another search...'
+            this.lyricSearched = false;
         });  
-
-        this.lyricSearched = true;
 
         //Set song and artist to be used in title after search
         this.songname = this.song;
         this.artistname = this.artist;
     }
 
+    //Captures user input (song and artist name)
     changeHandler(event){
         const {name, value,} = event.target
 
@@ -57,7 +68,15 @@ export default class SearchBar extends LwcBootstrap {
         }
     }
 
+    //Title with Song and Artist name
     get title(){
-        return `Lyrics for ${this.songname} by ${this.artistname}`
+        return `Lyrics for ${this.songname} by ${this.artistname}`;
+    }
+
+    //hides loading message after set time interval
+    hideLoading(){
+        setTimeout(()=>{
+            this.lyricSearched = false;
+        }, 1500)
     }
 }
